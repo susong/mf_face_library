@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="transparent33">#33000000</color>
+    <color name="transparent66">#66000000</color>
+    <color name="transparent73">#73000000</color>
+    <color name="transparent99">#99000000</color>
+    <color name="transparentcc">#cc000000</color>
+    <color name="transparentee">#ee000000</color>
+    <color name="text">#27639A</color>
+    <color name="textBg">#D8F2FF</color>
+    <color name="btnText">#FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+</resources>
