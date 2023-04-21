@@ -12,14 +12,13 @@ import static com.mf.face.model.FaceConstant.CODE_FACE_REGISTER_RESULT;
 import static com.mf.face.model.FaceConstant.CODE_FACE_REGISTER_TIPS_RESULT;
 import static com.mf.face.model.FaceConstant.CODE_MANUAL_CANCEL_FACE_RECOGNITION;
 import static com.mf.face.model.FaceConstant.CODE_MANUAL_CANCEL_FACE_REGISTER;
+import static com.mf.face.model.FaceConstant.CODE_PICK_CAR_BY_BERTH;
+import static com.mf.face.model.FaceConstant.CODE_PICK_CAR_BY_PLATE;
 import static com.mf.face.model.FaceConstant.CODE_REMOVE_FACE_DATA;
 import static com.mf.face.model.FaceConstant.CODE_REMOVE_FACE_DATA_RESULT;
 import static com.mf.face.model.FaceConstant.CODE_SYNC_FACE_DATA;
 import static com.mf.face.model.FaceConstant.CODE_SYNC_FACE_DATA_RESULT;
-import static com.mf.face.model.FaceConstant.CODE_PICK_CAR_BY_BERTH;
-import static com.mf.face.model.FaceConstant.CODE_PICK_CAR_BY_PLATE;
 
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +43,7 @@ import com.mf.log.LogUtils;
 public class FaceHelper {
     private static final String TAG = "face";
 
-    private Application context;
+    private Context context;
     // 用于接收服务端返回的消息
     private final Messenger serviceMessenger;
     // 与服务端交互的Messenger
@@ -93,7 +92,7 @@ public class FaceHelper {
         this.listener = listener;
     }
 
-    public synchronized void startFaceService(Application context) {
+    public synchronized void startFaceService(Context context) {
         if (!isBound) {
             LogUtils.d(TAG, "startFaceService");
             this.context = context;
@@ -104,7 +103,7 @@ public class FaceHelper {
         }
     }
 
-    public synchronized void stopFaceService(Application context) {
+    public synchronized void stopFaceService(Context context) {
         if (connection != null) {
             context.unbindService(connection);
         }
