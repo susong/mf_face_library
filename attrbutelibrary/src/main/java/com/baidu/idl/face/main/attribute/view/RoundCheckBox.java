@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatCheckBox;
 
-import com.baidu.idl.main.facesdk.attrbutelibrary.R;
-
 /**
  * author : shangrong
  * date : 2019/6/10 10:12 PM
@@ -18,7 +16,7 @@ public class RoundCheckBox extends AppCompatCheckBox {
     }
 
     public RoundCheckBox(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.radioButtonStyle);
+        super(context, attrs);
     }
 
     public RoundCheckBox(Context context, AttributeSet attrs, int defStyleAttr) {
