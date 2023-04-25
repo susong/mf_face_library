@@ -237,86 +237,108 @@ public class FaceHelper {
     }
 
     private void onError(int code, String msg) {
-//        LogUtils.d(TAG, "onError code:" + code + " msg:" + msg);
+        LogUtils.d(TAG, "onError code:" + code + " msg:" + msg);
         if (listener != null) {
             listener.onError(code, msg);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onFaceRegisterTipsResult(FaceTipsEntity entity) {
-//        LogUtils.d(TAG, "onFaceRegisterTipsResult :" + entity);
+        LogUtils.d(TAG, "onFaceRegisterTipsResult :" + entity);
         if (listener != null) {
             listener.onFaceRegisterTipsResult(entity);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onFaceRecognitionTipsResult(FaceTipsEntity entity) {
-//        LogUtils.d(TAG, "onFaceRecognitionTipsResult :" + entity);
+        LogUtils.d(TAG, "onFaceRecognitionTipsResult :" + entity);
         if (listener != null) {
             listener.onFaceRecognitionTipsResult(entity);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onFaceRegisterResult(FaceRegisterEntity entity) {
-//        LogUtils.d(TAG, "onFaceRegisterResult :" + entity);
+        LogUtils.d(TAG, "onFaceRegisterResult :" + entity);
         if (listener != null) {
             listener.onFaceRegisterResult(entity);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onFaceRecognitionResult(FaceRecognitionEntity entity) {
-//        LogUtils.d(TAG, "onFaceRecognitionResult :" + entity);
+        LogUtils.d(TAG, "onFaceRecognitionResult :" + entity);
         if (listener != null) {
             listener.onFaceRecognitionResult(entity);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onCancelFaceRegisterAndRecognitionResult(int code, String msg) {
-//        LogUtils.d(TAG, "onCancelFaceRegisterAndRecognitionResult code:" + code + " msg:" + msg);
+        LogUtils.d(TAG, "onCancelFaceRegisterAndRecognitionResult code:" + code + " msg:" + msg);
         if (listener != null) {
             listener.onCancelFaceRegisterAndRecognitionResult(code, msg);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onSyncFaceDataResult(int code, String msg) {
-//        LogUtils.d(TAG, "onSyncFaceDataResult code:" + code + " msg:" + msg);
+        LogUtils.d(TAG, "onSyncFaceDataResult code:" + code + " msg:" + msg);
         if (listener != null) {
             listener.onSyncFaceDataResult(code, msg);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onRemoveFaceDataResult(int code, String msg) {
-//        LogUtils.d(TAG, "onRemoveFaceDataResult code:" + code + " msg:" + msg);
+        LogUtils.d(TAG, "onRemoveFaceDataResult code:" + code + " msg:" + msg);
         if (listener != null) {
             listener.onRemoveFaceDataResult(code, msg);
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onManualCancelFaceRegister() {
-//        LogUtils.d(TAG, "onManualCancelFaceRegister");
+        LogUtils.d(TAG, "onManualCancelFaceRegister");
         if (listener != null) {
             listener.onManualCancelFaceRegister();
         }
     }
 
     private void onManualCancelFaceRecognition() {
-//        LogUtils.d(TAG, "onManualCancelFaceRecognition");
+        LogUtils.d(TAG, "onManualCancelFaceRecognition");
         if (listener != null) {
             listener.onManualCancelFaceRecognition();
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onPickCarByPlate() {
-//        LogUtils.d(TAG, "onPickCarByPlate");
+        LogUtils.d(TAG, "onPickCarByPlate");
         if (listener != null) {
             listener.onPickCarByPlate();
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
     private void onPickCarByBerth() {
-//        LogUtils.d(TAG, "onPickCarByBerth");
+        LogUtils.d(TAG, "onPickCarByBerth");
         if (listener != null) {
             listener.onPickCarByBerth();
+        } else {
+            LogUtils.w("listener is null");
         }
     }
 
