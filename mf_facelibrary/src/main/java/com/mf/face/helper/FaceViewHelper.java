@@ -152,8 +152,8 @@ public class FaceViewHelper implements View.OnClickListener {
         mCircleTransparentView = view.findViewById(R.id.circle_transparent_view);
         mIvFaceMask = view.findViewById(R.id.iv_face_mask);
         mBtnCancel = view.findViewById(R.id.btn_cancel);
-//        mBtnPickCarByPlate = view.findViewById(R.id.btn_pick_car_by_plate);
-//        mBtnPickCarByBerth = view.findViewById(R.id.btn_pick_car_by_berth);
+        mBtnPickCarByPlate = view.findViewById(R.id.btn_pick_car_by_plate);
+        mBtnPickCarByBerth = view.findViewById(R.id.btn_pick_car_by_berth);
         if (mBtnCancel != null) {
             mBtnCancel.setOnClickListener(this);
         }
@@ -169,7 +169,7 @@ public class FaceViewHelper implements View.OnClickListener {
             }
         } else {
             if (mBtnCancel != null) {
-                mBtnCancel.setText("取消");
+                mBtnCancel.setText("");
             }
         }
 
@@ -304,7 +304,7 @@ public class FaceViewHelper implements View.OnClickListener {
 //                mCircleTransparentView.setVisibility(isShow ? View.VISIBLE : View.GONE);
             }
             if (mIvFaceMask != null) {
-                mIvFaceMask.setVisibility(isShow ? View.VISIBLE : View.GONE);
+//                mIvFaceMask.setVisibility(isShow ? View.VISIBLE : View.GONE);
             }
         });
     }
@@ -360,14 +360,14 @@ public class FaceViewHelper implements View.OnClickListener {
             if (onCancelClickListener != null) {
                 onCancelClickListener.onCancelClick();
             }
-//        } else if (v.getId() == R.id.btn_pick_car_by_plate) {
-//            if (onPickCarByPlateClickListener != null) {
-//                onPickCarByPlateClickListener.onPickCarByPlateClick();
-//            }
-//        } else if (v.getId() == R.id.btn_pick_car_by_berth) {
-//            if (onPickCarByBerthClickListener != null) {
-//                onPickCarByBerthClickListener.onPickCarByBerthClick();
-//            }
+        } else if (v.getId() == R.id.btn_pick_car_by_plate) {
+            if (onPickCarByPlateClickListener != null) {
+                onPickCarByPlateClickListener.onPickCarByPlateClick();
+            }
+        } else if (v.getId() == R.id.btn_pick_car_by_berth) {
+            if (onPickCarByBerthClickListener != null) {
+                onPickCarByBerthClickListener.onPickCarByBerthClick();
+            }
         } else {
             LogUtils.w(TAG, "unknown view click");
         }

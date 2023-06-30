@@ -38,7 +38,7 @@ public class AutoTexturePreviewView extends FrameLayout {
     public float circleX;
     public float circleY;
     private Path path;
-    private boolean isRegister = false;   // 注册
+    private boolean isRegister = true;   // 注册
 
     public AutoTexturePreviewView(Context context) {
         super(context);
@@ -122,11 +122,11 @@ public class AutoTexturePreviewView extends FrameLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         // 圆的半径
-        circleRadius = (float) getHeight() / 2.3f;
+        circleRadius = (float) getHeight() / 2f;
         // 圆心的X坐标
-        circleX = (float) getWidth() / 2;
+        circleX = (float) getWidth() / 2f;
         // 圆心的Y坐标
-        circleY = (float) getHeight() / 2;
+        circleY = (float) getHeight() / 2f;
         if (isRegister) {
             // 设置裁剪的圆心坐标，半径
             path.reset();
