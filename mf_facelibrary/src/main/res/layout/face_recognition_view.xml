@@ -1,194 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.mf.face.view.AutoSizeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/transparentee"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="952dp"
-        android:layout_height="1040dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/shape_rectangle"
-        android:orientation="vertical">
+    <!--摄像头预览-->
+    <com.mf.face.camera.AutoTexturePreviewView
+        android:id="@+id/rgb_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="26dp"
-            android:background="@color/transparent33"
-            android:orientation="vertical">
+    <com.mf.face.camera.AutoTexturePreviewView
+        android:id="@+id/nir_camera_preview_view"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:alpha="0" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/title_left_line" />
-
-                <TextView
-                    android:id="@+id/tv_tips"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="请将人脸对准上方摄像头"
-                    android:textColor="@color/white"
-                    android:textSize="40sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/title_right_line" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="692dp"
-                android:layout_height="692dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="96dp"
-                android:background="@drawable/shape_ring"
-                android:padding="4dp">
-                <!--摄像头预览-->
-                <com.mf.face.camera.AutoTexturePreviewView
-                    android:id="@+id/rgb_camera_preview_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:alpha="1">
-
-                    <com.mf.face.camera.AutoTexturePreviewView
-                        android:id="@+id/nir_camera_preview_view"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="100dp"
-                        android:layout_marginTop="100dp"
-                        android:alpha="0.5" />
-
-                    <!--画人脸检测框-->
-                    <TextureView
-                        android:id="@+id/draw_detect_face_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true" />
-
-                    <ImageView
-                        android:id="@+id/iv_face_mask"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/face_mask"
-                        android:visibility="gone" />
-
-                    <com.mf.face.view.CircleTransparentView
-                        android:id="@+id/circle_transparent_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone" />
-
-                    <com.mf.face.view.ScannerBarView
-                        android:id="@+id/scanner_bar_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:sbvSrc="@drawable/camera_mask_scanner_bar2" />
-
-                    <RelativeLayout
-                        android:id="@+id/face_result"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/transparent73"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/face_result_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@id/face_result_anchor"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="14dp"
-                            android:src="@drawable/icon_face_recognition_failed" />
-
-                        <View
-                            android:id="@+id/face_result_anchor"
-                            android:layout_width="1dp"
-                            android:layout_height="1dp"
-                            android:layout_centerInParent="true" />
-
-                        <TextView
-                            android:id="@+id/face_result_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/face_result_anchor"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="14dp"
-                            android:text="人脸识别失败"
-                            android:textColor="@color/btnText"
-                            android:textSize="40sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
-
-                </com.mf.face.camera.AutoTexturePreviewView>
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="952dp"
-        android:layout_height="190dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/shape_rectangle"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn_pick_car_by_plate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_pick_car_by_plate" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn_pick_car_by_berth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_pick_car_by_berth" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_give_up_take_car" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-</com.mf.face.view.AutoSizeLinearLayout>
+    <!--画人脸检测框-->
+    <TextureView
+        android:id="@+id/draw_detect_face_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

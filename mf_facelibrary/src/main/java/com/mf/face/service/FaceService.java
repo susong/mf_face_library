@@ -125,7 +125,7 @@ public class FaceService extends Service implements FaceTipsListener, FaceRegist
                     cancelAll();
                     sendMessage(CODE_MANUAL_CANCEL_FACE_REGISTER);
                 })
-                .loadView(R.layout.face_register_view);
+                .loadView();
         faceRecognitionViewHelper = new FaceViewHelper();
         faceRecognitionViewHelper.setContext(this)
                 .setRegister(false)
@@ -141,7 +141,7 @@ public class FaceService extends Service implements FaceTipsListener, FaceRegist
                     cancelAll();
                     sendMessage(CODE_PICK_CAR_BY_BERTH);
                 })
-                .loadView(R.layout.face_recognition_view);
+                .loadView();
 
         faceRegisterHelper = new FaceRegisterHelper();
         faceRecognitionHelper = new FaceRecognitionHelper();

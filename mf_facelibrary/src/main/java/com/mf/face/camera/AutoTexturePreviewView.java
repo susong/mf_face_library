@@ -38,7 +38,7 @@ public class AutoTexturePreviewView extends FrameLayout {
     public float circleX;
     public float circleY;
     private Path path;
-    private boolean isRegister = true;   // 注册
+    private boolean isRegister = false;   // 注册
 
     public AutoTexturePreviewView(Context context) {
         super(context);

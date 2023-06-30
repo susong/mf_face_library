@@ -151,9 +151,9 @@ public class FaceViewHelper implements View.OnClickListener {
         mNirCameraPreviewView = view.findViewById(R.id.nir_camera_preview_view);
         mCircleTransparentView = view.findViewById(R.id.circle_transparent_view);
         mIvFaceMask = view.findViewById(R.id.iv_face_mask);
-        mBtnCancel = view.findViewById(R.id.btn_cancel);
-        mBtnPickCarByPlate = view.findViewById(R.id.btn_pick_car_by_plate);
-        mBtnPickCarByBerth = view.findViewById(R.id.btn_pick_car_by_berth);
+//        mBtnCancel = view.findViewById(R.id.btn_cancel);
+//        mBtnPickCarByPlate = view.findViewById(R.id.btn_pick_car_by_plate);
+//        mBtnPickCarByBerth = view.findViewById(R.id.btn_pick_car_by_berth);
         if (mBtnCancel != null) {
             mBtnCancel.setOnClickListener(this);
         }
@@ -206,18 +206,23 @@ public class FaceViewHelper implements View.OnClickListener {
 
         // 设置悬浮窗的大小，位置，是否可点击
         mLayoutParams = new WindowManager.LayoutParams();
-        mLayoutParams.width = width;
-        mLayoutParams.height = height;
+        mLayoutParams.width = (int) (width * (0.85f));
+        mLayoutParams.height = (int) (width * (0.85f));
         mLayoutParams.type = layoutType;
         mLayoutParams.flags = WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
-                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN // 将window放置在整个屏幕之内,无视其他的装饰(比如状态栏)
+                | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN // FLAG_LAYOUT_IN_SCREEN / FLAG_LAYOUT_INSET_DECOR：要一起使用；前者设置后窗口布局在StableFullScreen区域进行，但结果不一定是全屏；后者设置后可以避免此窗口与系统UI发生冲突。
+                | WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
                 | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS // 允许window扩展值屏幕之外
-                | WindowManager.LayoutParams.FLAG_FULLSCREEN // 当这个window显示的时候,隐藏所有的装饰物(比如状态栏)这个flag允许window使用整个屏幕区域
-                | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER; // 标记在其它窗口的LayoutParams.flags中的存在情况而不断地被调整
+                | WindowManager.LayoutParams.FLAG_FULLSCREEN // 设置后窗口是全屏的
+                | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER // 设置后此窗口的下面是壁纸
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE // 设置后，不管触摸事件是否在这个窗口范围内，都不会被这个窗口消费，也不会传递到下个窗口。
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL // 设置后，在窗口范围外的触摸事件会传递到下个窗口，如果还设置了FLAG_WATCH_OUTSIDE_TOUCH，那么还会在第一次DOWN时收到一个MotionEvent.OUT_SIDE事件。
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE // 设置后输入事件会略过这个窗口，传递到下个窗口；窗口范围内的触摸事件失效，范围外的会传递到下个窗口；这个窗口会置于软键盘之上，如果又设置FLAG_ALT_FOCUSABLE_IM则不会。
+        ;
         mLayoutParams.format = PixelFormat.TRANSLUCENT;
-        mLayoutParams.gravity = Gravity.CENTER;
+        mLayoutParams.gravity = Gravity.BOTTOM;
         mLayoutParams.x = 0;
-        mLayoutParams.y = 0;
+        mLayoutParams.y = DensityUtils.dip2px(mContext, 350);
     }
 
     private void setPosition() {
@@ -301,7 +306,7 @@ public class FaceViewHelper implements View.OnClickListener {
     public void showMask(boolean isShow) {
         ThreadUtils.runOnUiThread(() -> {
             if (mCircleTransparentView != null) {
-//                mCircleTransparentView.setVisibility(isShow ? View.VISIBLE : View.GONE);
+                mCircleTransparentView.setVisibility(isShow ? View.VISIBLE : View.GONE);
             }
             if (mIvFaceMask != null) {
 //                mIvFaceMask.setVisibility(isShow ? View.VISIBLE : View.GONE);
@@ -356,21 +361,21 @@ public class FaceViewHelper implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_cancel) {
-            if (onCancelClickListener != null) {
-                onCancelClickListener.onCancelClick();
-            }
-        } else if (v.getId() == R.id.btn_pick_car_by_plate) {
-            if (onPickCarByPlateClickListener != null) {
-                onPickCarByPlateClickListener.onPickCarByPlateClick();
-            }
-        } else if (v.getId() == R.id.btn_pick_car_by_berth) {
-            if (onPickCarByBerthClickListener != null) {
-                onPickCarByBerthClickListener.onPickCarByBerthClick();
-            }
-        } else {
-            LogUtils.w(TAG, "unknown view click");
-        }
+//        if (v.getId() == R.id.btn_cancel) {
+//            if (onCancelClickListener != null) {
+//                onCancelClickListener.onCancelClick();
+//            }
+//        } else if (v.getId() == R.id.btn_pick_car_by_plate) {
+//            if (onPickCarByPlateClickListener != null) {
+//                onPickCarByPlateClickListener.onPickCarByPlateClick();
+//            }
+//        } else if (v.getId() == R.id.btn_pick_car_by_berth) {
+//            if (onPickCarByBerthClickListener != null) {
+//                onPickCarByBerthClickListener.onPickCarByBerthClick();
+//            }
+//        } else {
+//            LogUtils.w(TAG, "unknown view click");
+//        }
     }
 
     public interface OnCancelClickListener {
