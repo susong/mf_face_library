@@ -121,12 +121,14 @@ public class AutoTexturePreviewView extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        int width = getWidth();
+        int height = getHeight();
         // 圆的半径
-        circleRadius = (float) getHeight() / 2.3f;
+        circleRadius = (float) Math.min(width, height) / 2.1f;
         // 圆心的X坐标
-        circleX = (float) getWidth() / 2;
+        circleX = (float) width / 2f;
         // 圆心的Y坐标
-        circleY = (float) getHeight() / 2;
+        circleY = (float) height / 2f;
         if (isRegister) {
             // 设置裁剪的圆心坐标，半径
             path.reset();

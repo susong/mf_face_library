@@ -57,10 +57,18 @@ public class CircleTransparentView extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        int width = getWidth();
+        int height = getHeight();
+        // 圆的半径
+        float circleRadius = (float) Math.min(width, height) / 2.1f;
+        // 圆心的X坐标
+        float circleX = (float) width / 2f;
+        // 圆心的Y坐标
+        float circleY = (float) height / 2f;
         // 画透明圆形，外围是半透明
         path.reset();
         path.addRect(0f, 0f, width, height, Path.Direction.CW);
-        path.addCircle((float) width / 2, (float) height / 2, (float) height / 2.3f, Path.Direction.CW);
+        path.addCircle(circleX, circleY, circleRadius, Path.Direction.CW);
         path.setFillType(Path.FillType.EVEN_ODD);
         canvas.drawPath(path, paint);
         super.onDraw(canvas);
