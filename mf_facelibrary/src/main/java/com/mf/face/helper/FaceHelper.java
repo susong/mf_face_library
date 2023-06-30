@@ -93,21 +93,29 @@ public class FaceHelper {
     }
 
     public synchronized void startFaceService(Context context) {
-        if (!isBound) {
-            LogUtils.d(TAG, "startFaceService");
-            this.context = context;
-            Intent intent = new Intent(context, FaceService.class);
-            context.bindService(intent, connection, Context.BIND_AUTO_CREATE);
-        } else {
-            LogUtils.d(TAG, "FaceService is bound");
+        try {
+            if (!isBound) {
+                LogUtils.d(TAG, "startFaceService");
+                this.context = context;
+                Intent intent = new Intent(context, FaceService.class);
+                context.bindService(intent, connection, Context.BIND_AUTO_CREATE);
+            } else {
+                LogUtils.d(TAG, "FaceService is bound");
+            }
+        } catch (Exception e) {
+            LogUtils.e(e);
         }
     }
 
     public synchronized void stopFaceService(Context context) {
-        if (connection != null) {
-            context.unbindService(connection);
+        try {
+            if (connection != null) {
+                context.unbindService(connection);
+            }
+            isBound = false;
+        } catch (Exception e) {
+            LogUtils.e(e);
         }
-        isBound = false;
     }
 
     public void faceRegister(boolean isShowPreviewView, String licenseNo) {

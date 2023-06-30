@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <Button
+        android:id="@+id/btn_go_home"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="去主页"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/btn_go_setting"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="去系统设置页"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/btn_go_face_setting"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="去人脸设置页"
+        android:textSize="40sp" />
+
+</LinearLayout>
