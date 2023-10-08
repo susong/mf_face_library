@@ -54,28 +54,52 @@ public class FaceHelper {
     // 记录最后一次操作事件，用于防抖
     private long faceRegisterOperateTime = 0;
     private long faceRecognitionOperateTime = 0;
+    private Handler handler;
+
+    private static final int CODE_RESTART_SERVICE = 1;
 
     private FaceHelper() {
-        serviceMessenger = new Messenger(new Handler(getMainLooper()) {
+        handler = new Handler(getMainLooper()) {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 onHandleMessage(msg);
+            }
+        };
+        serviceMessenger = new Messenger(new Handler(getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                onHandleServiceMessage(msg);
             }
         });
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogUtils.d(TAG, "onServiceConnected");
+                LogUtils.d(TAG, "onServiceConnected " + name.toString());
                 messenger = new Messenger(service);
                 isBound = true;
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                LogUtils.d(TAG, "onServiceDisconnected");
+                LogUtils.d(TAG, "onServiceDisconnected " + name.toString());
                 isBound = false;
-                // 服务断开后，立刻重新连接
-                startFaceService(context);
+                // 服务断开后，延时一段时间后，重新启动
+                handler.removeMessages(CODE_RESTART_SERVICE);
+                handler.sendEmptyMessageDelayed(CODE_RESTART_SERVICE, 200);
+            }
+
+            @Override
+            public void onBindingDied(ComponentName name) {
+                LogUtils.d(TAG, "onBindingDied " + name.toString());
+                // 服务死亡后，先停止服务，延时一段时间后，重新启动
+                stopFaceService(context);
+                handler.removeMessages(CODE_RESTART_SERVICE);
+                handler.sendEmptyMessageDelayed(CODE_RESTART_SERVICE, 200);
+            }
+
+            @Override
+            public void onNullBinding(ComponentName name) {
+                LogUtils.d(TAG, "onNullBinding " + name.toString());
             }
         };
     }
@@ -161,7 +185,9 @@ public class FaceHelper {
 
     private synchronized void sendMessage(int code, boolean isShowPreviewView, String licenseNo, String faceId, String faceFeature) {
         if (!isBound) {
-            LogUtils.d(TAG, "FaceService is not bind");
+            LogUtils.d(TAG, "FaceService is not bind, try rebind");
+            handler.removeMessages(CODE_RESTART_SERVICE);
+            handler.sendEmptyMessageDelayed(CODE_RESTART_SERVICE, 200);
             return;
         }
         try {
@@ -187,7 +213,7 @@ public class FaceHelper {
         }
     }
 
-    private void onHandleMessage(Message message) {
+    private void onHandleServiceMessage(Message message) {
         Bundle bundle = message.getData();
         int what = message.what;
         int code = bundle.getInt("code", 0);
@@ -368,5 +394,17 @@ public class FaceHelper {
         }
         faceRecognitionOperateTime = currentTimeMillis;
         return true;
+    }
+
+    private void onHandleMessage(Message message) {
+        int what = message.what;
+        switch (what) {
+            case CODE_RESTART_SERVICE:
+                startFaceService(context);
+                break;
+            default:
+                LogUtils.d(TAG, "unknown what:" + what);
+                break;
+        }
     }
 }
