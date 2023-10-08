@@ -344,7 +344,7 @@ public class FaceSDKManager {
                     @Override
                     public void onResponse(int code, String response) {
                         long endInitModelTime = System.currentTimeMillis();
-                        LogUtils.e(TIME_TAG, "init model time = " + (endInitModelTime - startInitModelTime));
+                        LogUtils.w(TIME_TAG, "init model time = " + (endInitModelTime - startInitModelTime));
                         if (code != 0) {
 //                            ToastUtils.toast(context, "模型加载失败,尝试重启试试");
                             LogUtils.w(TAG, "模型加载失败,尝试重启试试");
@@ -466,7 +466,7 @@ public class FaceSDKManager {
 
 
     private void setFail(LivenessModel livenessModel) {
-        LogUtils.e("faceId", livenessModel.getFaceInfo().faceID + "");
+        LogUtils.w("faceId", livenessModel.getFaceInfo().faceID + "");
         if (failNumber >= 2) {
             faceId = livenessModel.getFaceInfo().faceID;
             faceAdoptModel = livenessModel;
@@ -666,7 +666,7 @@ public class FaceSDKManager {
 
             // 光照结果过滤
             float illum = livenessModel.getFaceInfo().illum;
-            LogUtils.e("illum", "illum = " + illum);
+            LogUtils.w("illum", "illum = " + illum);
             if (illum < SingleBaseConfig.getBaseConfig().getIllumination()) {
                 faceDetectCallBack.onTip(-1, "图片光照不通过");
                 return false;
@@ -773,7 +773,7 @@ public class FaceSDKManager {
                         scores = faceMouthMask.checkMask(rgbInstance, faceInfos);
                         if (scores != null) {
                             livenessModel.setMaskScore(scores[0]);
-                            LogUtils.e("FaceMouthMask", scores[0] + "");
+                            LogUtils.w("FaceMouthMask", scores[0] + "");
                         }
                     }
                 } else {
