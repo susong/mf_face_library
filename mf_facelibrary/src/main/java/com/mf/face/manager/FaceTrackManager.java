@@ -119,7 +119,7 @@ public class FaceTrackManager {
             FaceInfo faceInfo = faceInfos[0];
             livenessModel.setFaceInfo(faceInfo);
             livenessModel.setLandmarks(faceInfo.landmarks);
-            LogUtils.e(TAG, "ldmk = " + faceInfo.landmarks.length);
+            LogUtils.w(TAG, "ldmk = " + faceInfo.landmarks.length);
 
             // 质量检测，针对模糊度、遮挡、角度
             if (onQualityCheck(livenessModel, faceDetectCallBack)) {
@@ -130,7 +130,7 @@ public class FaceTrackManager {
                     float rgbScore = faceSDKManager.getFaceLiveness().silentLive(
                             BDFaceSDKCommon.LiveType.BDFACE_SILENT_LIVE_TYPE_RGB,
                             rgbInstance, faceInfo.landmarks);
-                    LogUtils.e(TAG, "score = " + rgbScore);
+                    LogUtils.w(TAG, "score = " + rgbScore);
                     livenessModel.setRgbLivenessScore(rgbScore);
                     livenessModel.setRgbLivenessDuration(System.currentTimeMillis() - startTime);
                 }

@@ -342,7 +342,7 @@ public final class BitmapUtils {
                 }
             }
         }
-        LogUtils.e(TAG, file.getAbsolutePath());
+        LogUtils.w(TAG, file.getAbsolutePath());
         return Uri.fromFile(file);
     }
 

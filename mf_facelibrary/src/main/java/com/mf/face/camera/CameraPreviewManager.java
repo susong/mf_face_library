@@ -124,7 +124,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
      */
     public void startPreview(Context context, AutoTexturePreviewView autoTexturePreviewView, int width,
                              int height, CameraDataCallback cameraDataCallback) {
-        LogUtils.e(TAG, "开启预览模式 isNir:" + isNir);
+        LogUtils.w(TAG, "开启预览模式 isNir:" + isNir);
         Context mContext = context;
         this.mCameraDataCallback = cameraDataCallback;
         this.mAutoTexturePreviewView = autoTexturePreviewView;
@@ -132,15 +132,15 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
         this.previewHeight = height;
 
         if (mAutoTexturePreviewView != null) {
-            LogUtils.e(TAG, "mAutoTexturePreviewView != null");
+            LogUtils.w(TAG, "mAutoTexturePreviewView != null");
             mSurfaceTexture = mAutoTexturePreviewView.getTextureView().getSurfaceTexture();
             mAutoTexturePreviewView.getTextureView().setSurfaceTextureListener(this);
             if (mSurfaceTexture != null && mAutoTexturePreviewView.getTextureView().isAttachedToWindow()) {
-                LogUtils.e(TAG, "mSurfaceTexture != null && mAutoTexturePreviewView.getTextureView().isAttachedToWindow()");
+                LogUtils.w(TAG, "mSurfaceTexture != null && mAutoTexturePreviewView.getTextureView().isAttachedToWindow()");
                 onSurfaceTextureAvailable(mSurfaceTexture, mAutoTexturePreviewView.getWidth(), mAutoTexturePreviewView.getHeight());
             }
         } else {
-            LogUtils.e(TAG, "mAutoTexturePreviewView is null");
+            LogUtils.w(TAG, "mAutoTexturePreviewView is null");
             mSurfaceTexture = new SurfaceTexture(1);
             onSurfaceTextureAvailable(mSurfaceTexture, 0, 0);
         }
@@ -148,7 +148,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-        LogUtils.e(TAG, "--surfaceTexture--SurfaceTextureAvailable texture:" + texture);
+        LogUtils.w(TAG, "--surfaceTexture--SurfaceTextureAvailable texture:" + texture);
         mSurfaceTexture = texture;
         mSurfaceCreated = true;
         textureWidth = width;
@@ -158,12 +158,12 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-        LogUtils.e(TAG, "--surfaceTexture--TextureSizeChanged");
+        LogUtils.w(TAG, "--surfaceTexture--TextureSizeChanged");
     }
 
     @Override
     public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
-        LogUtils.e(TAG, "--surfaceTexture--destroyed");
+        LogUtils.w(TAG, "--surfaceTexture--destroyed");
         mSurfaceCreated = false;
         if (mCamera != null) {
             if (mAutoTexturePreviewView != null) {
@@ -192,7 +192,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
                 if (mAutoTexturePreviewView != null) {
                     mAutoTexturePreviewView.getTextureView().setSurfaceTextureListener(null);
                 }
-                LogUtils.e(TAG, "camera stopPreview isNir:" + isNir);
+                LogUtils.w(TAG, "camera stopPreview isNir:" + isNir);
                 mCamera.setPreviewCallback(null);
                 mCamera.stopPreview();
 //                mCamera.setPreviewTexture(null);
@@ -225,7 +225,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
 //                }
                 cameraId = cameraFacing;
                 mCamera = Camera.open(cameraId);
-                LogUtils.e(TAG, "initCamera---open camera");
+                LogUtils.w(TAG, "initCamera---open camera");
             }
 
             // 摄像头图像预览角度
@@ -297,7 +297,7 @@ public class CameraPreviewManager implements TextureView.SurfaceTextureListener 
 
             mCamera.setParameters(params);
             try {
-                LogUtils.e(TAG, "initCamera---setPreviewTexture mSurfaceTexture:" + mSurfaceTexture);
+                LogUtils.w(TAG, "initCamera---setPreviewTexture mSurfaceTexture:" + mSurfaceTexture);
                 mCamera.setPreviewTexture(mSurfaceTexture);
                 mCamera.setPreviewCallback(new Camera.PreviewCallback() {
                     @Override
