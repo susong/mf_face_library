@@ -441,9 +441,9 @@ public class FaceService extends Service implements FaceTipsListener, FaceRegist
         if (code == FaceConstant.CODE_SUCCESS || code == FaceConstant.CODE_ALREADY_REGISTER) {
             if (!StringUtils.isEmpty(tag) && faceTagSet.contains(tag)) {
                 faceTagSet.remove(tag);
-                LogUtils.e(TAG, "@@aa@@ tag 注册成功:" + tag);
+                LogUtils.w(TAG, "@@aa@@ tag 注册成功:" + tag);
             } else {
-                LogUtils.e(TAG, "@@aa@@ tag 注册标识已被移除:" + tag);
+                LogUtils.w(TAG, "@@aa@@ tag 注册标识已被移除:" + tag);
             }
             faceRegisterViewHelper.hideView();
         }
@@ -464,9 +464,9 @@ public class FaceService extends Service implements FaceTipsListener, FaceRegist
         if (code == FaceConstant.CODE_SUCCESS || code == FaceConstant.CODE_ALREADY_REGISTER) {
             if (!StringUtils.isEmpty(tag) && faceTagSet.contains(tag)) {
                 faceTagSet.remove(tag);
-                LogUtils.e(TAG, "@@aa@@ tag 识别成功:" + tag);
+                LogUtils.w(TAG, "@@aa@@ tag 识别成功:" + tag);
             } else {
-                LogUtils.e(TAG, "@@aa@@ tag 识别标识已被移除:" + tag);
+                LogUtils.w(TAG, "@@aa@@ tag 识别标识已被移除:" + tag);
             }
         }
         String msg = entity.getMsg();

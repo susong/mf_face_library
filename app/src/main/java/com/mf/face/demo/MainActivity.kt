@@ -1,14 +1,19 @@
 package com.mf.face.demo
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.mf.face.entity.FaceRecognitionEntity
+import com.mf.face.entity.FaceRegisterEntity
+import com.mf.face.entity.FaceTipsEntity
 import com.mf.face.helper.FaceHelper
+import com.mf.face.listener.FaceHelperListener
 import java.util.UUID
-import java.util.stream.IntStream
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+    final val TAG = MainActivity::class.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,5 +66,54 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_removeFaceData).setOnClickListener {
             FaceHelper.getInstance().removeFaceData()
         }
+        FaceHelper.getInstance().setListener(object : FaceHelperListener {
+            override fun onError(code: Int, msg: String?) {
+                Log.i(TAG, "onError code:$code msg:$msg")
+            }
+
+            override fun onFaceRegisterTipsResult(entity: FaceTipsEntity?) {
+                Log.i(TAG, "onFaceRegisterTipsResult entity:$entity")
+            }
+
+            override fun onFaceRecognitionTipsResult(entity: FaceTipsEntity?) {
+                Log.i(TAG, "onFaceRecognitionTipsResult entity:$entity")
+            }
+
+            override fun onFaceRegisterResult(entity: FaceRegisterEntity?) {
+                Log.i(TAG, "onFaceRegisterResult entity:$entity")
+            }
+
+            override fun onFaceRecognitionResult(entity: FaceRecognitionEntity?) {
+                Log.i(TAG, "onFaceRecognitionResult entity:$entity")
+            }
+
+            override fun onCancelFaceRegisterAndRecognitionResult(code: Int, msg: String?) {
+                Log.i(TAG, "onCancelFaceRegisterAndRecognitionResult code:$code msg:$msg")
+            }
+
+            override fun onSyncFaceDataResult(code: Int, msg: String?) {
+                Log.i(TAG, "onSyncFaceDataResult code:$code msg:$msg")
+            }
+
+            override fun onRemoveFaceDataResult(code: Int, msg: String?) {
+                Log.i(TAG, "onRemoveFaceDataResult code:$code msg:$msg")
+            }
+
+            override fun onManualCancelFaceRegister() {
+                Log.i(TAG, "onManualCancelFaceRegister")
+            }
+
+            override fun onManualCancelFaceRecognition() {
+                Log.i(TAG, "onManualCancelFaceRecognition")
+            }
+
+            override fun onPickCarByPlate() {
+                Log.i(TAG, "onPickCarByPlate")
+            }
+
+            override fun onPickCarByBerth() {
+                Log.i(TAG, "onPickCarByBerth")
+            }
+        })
     }
 }
